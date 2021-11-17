@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_flashlights">
+
+    <fragment
+        android:id="@+id/nav_flashlights"
+        android:name="com.saber.flashlightsmarket.ui.flashlights.FlashlightsFragment"
+        android:label="@string/title_flash_lights"
+        tools:layout="@layout/fragment_flashlights" />
+
+    <fragment
+        android:id="@+id/nav_colored_lights"
+        android:name="com.saber.flashlightsmarket.ui.colored_lights.ColoredLightsFragment"
+        android:label="@string/title_colored_lights"
+        tools:layout="@layout/fragment_colored_lights" />
+
+    <fragment
+        android:id="@+id/nav_sos_alerts"
+        android:name="com.saber.flashlightsmarket.ui.sos.SOSAletsFragment"
+        android:label="@string/title_sos_alerts"
+        tools:layout="@layout/fragment_sos_alerts" />
+</navigation>

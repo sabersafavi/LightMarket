@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Flashlight Apps Market</string>
+
+    <string name="title_flash_lights">Flashlights</string>
+    <string name="title_colored_lights">Colored Lights</string>
+    <string name="title_sos_alerts">SOS Alerts</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+</resources>
