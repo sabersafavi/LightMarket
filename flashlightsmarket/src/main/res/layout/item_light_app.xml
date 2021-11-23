@@ -43,11 +43,10 @@
                 android:includeFontPadding="false"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:textColor="@color/white"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="@{lightApp.name}"
+                android:text="@{lightApp.priceString}"
                 tools:text="@string/app_name" />
 
             <TextView
@@ -85,7 +84,7 @@
                 app:layout_constraintStart_toEndOf="@+id/userImageView"
                 app:layout_constraintTop_toBottomOf="@+id/titleTextView"
                 app:layout_constraintVertical_chainStyle="packed"
-                android:text="@{lightApp.name}"
+                android:text="@{lightApp.rate}"
                 tools:text="Rohit" />
 
             <TextView
@@ -97,7 +96,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/nameTextView"
                 app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-                android:text="@{lightApp.name}"
+                android:text="@{lightApp.developerString}"
                 tools:text="#2048 was merged on 24 Mar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

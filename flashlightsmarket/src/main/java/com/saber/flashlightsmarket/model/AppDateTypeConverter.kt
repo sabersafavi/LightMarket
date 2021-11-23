@@ -17,4 +17,15 @@ class AppDateTypeConverter {
     fun fromAppDate(appDate: AppDate): String {
         return Gson().toJson(appDate)
     }
+
+    @TypeConverter
+    fun fromAppArray(value: String): ArrayList<LightApp> {
+        val type = object : TypeToken<ArrayList<LightApp>>() {}.type
+        return Gson().fromJson(value, type)
+    }
+
+    @TypeConverter
+    fun fromAppArray(items: ArrayList<LightApp>): String {
+        return Gson().toJson(items)
+    }
 }

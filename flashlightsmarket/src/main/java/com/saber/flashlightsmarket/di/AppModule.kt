@@ -10,9 +10,7 @@ import com.saber.flashlightsmarket.utils.Prefs
 import com.saber.flashlightsmarket.utils.SharedPreferencesHelper
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.saber.flashlightsmarket.ui.colored_lights.ColoredLightsViewModel
-import com.saber.flashlightsmarket.ui.flashlights.FlashlightsViewModel
-import com.saber.flashlightsmarket.ui.sos.SOSAlertViewModel
+import com.saber.flashlightsmarket.ui.LightsAppViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -54,5 +52,5 @@ val appModule = module {
 
 //    viewModel { ColoredLightsViewModel(get()) }
 //    viewModel { FlashlightsViewModel(get()) }
-    viewModel { SOSAlertViewModel(get()) }
+    viewModel { LightsAppViewModel(get()) }
 }

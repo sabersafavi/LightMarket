@@ -1,4 +1,4 @@
-package com.example.mvvm.utils
+package com.saber.flashlightsmarket.utils
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView

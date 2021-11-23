@@ -1,13 +1,7 @@
 package com.saber.flashlightsmarket.ui.sos
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.example.mvvm.utils.EndlessRecyclerOnScrollListener
+import com.saber.flashlightsmarket.utils.EndlessRecyclerOnScrollListener
 import com.saber.flashlightsmarket.R
 import com.saber.flashlightsmarket.base.BaseFragment
 import com.saber.flashlightsmarket.custom.LoadingDialog
@@ -19,12 +13,15 @@ import com.saber.flashlightsmarket.utils.getErrorMessage
 import com.saber.flashlightsmarket.utils.toast
 import kotlinx.android.synthetic.main.fragment_sos_alerts.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import retrofit2.HttpException
+import android.content.Intent
+import android.net.Uri
+import com.saber.flashlightsmarket.ui.LightsAppViewModel
+import com.saber.flashlightsmarket.utils.enums.LightType
 
 class SOSAletsFragment : BaseFragment<FragmentSosAlertsBinding>(),
     AppsAdapter.OnLightAppClickedListener {
 
-    private val sosAlertViewModel by viewModel<SOSAlertViewModel>()
+    private val viewModel by viewModel<LightsAppViewModel>()
     private val lightsAdapter by lazy { AppsAdapter(this) }
     private val loadingDialog by lazy {
         LoadingDialog(requireActivity()).apply {
@@ -35,7 +32,7 @@ class SOSAletsFragment : BaseFragment<FragmentSosAlertsBinding>(),
     private val endlessRecyclerOnScrollListener by lazy {
         object : EndlessRecyclerOnScrollListener() {
             override fun onLoadMore(current_page: Int) {
-                sosAlertViewModel.getSOSAlerts()
+                viewModel.getLightApps(LightType.SOSAlert)
             }
         }
     }
@@ -43,23 +40,29 @@ class SOSAletsFragment : BaseFragment<FragmentSosAlertsBinding>(),
     override fun getLayoutId(): Int = R.layout.fragment_sos_alerts
 
     override fun onAppClicked(app: LightApp) {
-        app.name.toast(requireActivity())
-//        if (findNavController().currentDestination?.id == R.id.pullRequestsFragment) {
-//            findNavController().navigate(
-//                PullRequestsFragmentDirections.actionPullRequestsFragmentToWebViewFragment(
-//                    pullRequest.html_url
-//                )
-//            )
-//        }
+        var packageName = app.packageName
+        context?.let {
+            val launchIntent =
+                it.packageManager.getLaunchIntentForPackage(packageName)
+            if (launchIntent != null) {
+                startActivity(launchIntent) //null pointer check in case package name was not found
+            } else {
+                // Bring user to the market or let them choose an app?
+                var intent = Intent(Intent.ACTION_VIEW);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.data = Uri.parse("market://details?id=$packageName");
+                startActivity(intent);
+            }
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         getDataBinding().appAdapter = lightsAdapter
-        getDataBinding().viewModel = sosAlertViewModel
+        getDataBinding().viewModel = viewModel
 
-        sosAlertViewModel.items.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.items.observe(viewLifecycleOwner, { response ->
 
             when (response) {
                 is Response.Loading -> {
@@ -90,6 +93,7 @@ class SOSAletsFragment : BaseFragment<FragmentSosAlertsBinding>(),
         rvItems.addOnScrollListener(endlessRecyclerOnScrollListener)
 
         setHasOptionsMenu(true)
+        //
+        viewModel.getLightApps(LightType.SOSAlert)
     }
-
 }

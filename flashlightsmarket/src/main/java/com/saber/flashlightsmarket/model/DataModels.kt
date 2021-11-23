@@ -21,13 +21,19 @@ data class LightApp(
     var developerName: String = "",
     var developerEmail: String = "",
     var developerAddress: String = ""
-)
+){
+    fun getPriceString() =  "price :\n$price"
+    fun getRate() =  "rate :$ratingValue \nrate count: $ratingCount"
+    fun getDeveloperString() =  "developer :$developerName"
+}
+
 
 @Dao
 interface LightsDao {
 
+//    @TypeConverters(AppDateTypeConverter::class)
 //    @Query("SELECT * FROM lights WHERE lightType == 1")
-//    suspend fun getFlashLights(): List<LightApp>
+//    suspend fun getFlashLights(): ArrayList<LightApp>
 //
 //    @Query("SELECT * FROM lights WHERE lightType == 2")
 //    suspend fun getColoredLights(): List<LightApp>

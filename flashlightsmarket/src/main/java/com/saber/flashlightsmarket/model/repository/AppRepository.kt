@@ -47,10 +47,22 @@ class AppRepository(
         }
     }
 
+    suspend fun getFlashlightsApps(): List<LightApp> {
+        val items = networkService.getFlashlightsAsync().await()
+        saveSOSAlertApps(items)
+        return items
+    }
+
+    suspend fun getColoredLightsApps(): List<LightApp> {
+        val items = networkService.getColoredLightsAsync().await()
+        saveSOSAlertApps(items)
+        return items
+    }
+
     suspend fun getSOSAlerts(): List<LightApp> {
 //        val items = getFlashlightsAppsFromDB()
         val items = networkService.getSOSAlertsAsync().await()
-//        saveSOSAlertApps(items)
+        saveSOSAlertApps(items)
         return items
     }
 }
